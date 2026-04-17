@@ -1,0 +1,37 @@
+LazyCaptcha for MyBB — Install Instructions
+============================================
+
+QUICK INSTALL
+-------------
+
+1. Upload the contents of this archive into your MyBB forum root,
+   preserving directory structure:
+
+     inc/plugins/lazycaptcha.php
+     inc/languages/english/admin/config_lazycaptcha.lang.php
+
+2. Log in to the MyBB Admin Control Panel.
+
+3. Navigate to: Configuration → Plugins
+
+4. Find "LazyCaptcha" in the list, click:
+     Install & Activate
+
+5. Navigate to: Configuration → Settings → LazyCaptcha
+
+6. Enter your Site Key and Secret Key from your LazyCaptcha dashboard
+   (https://lazycaptcha.com). Save.
+
+7. Log out and try registering a new account to confirm the widget
+   appears.
+
+UNINSTALL
+---------
+
+1. Configuration → Plugins → LazyCaptcha → Deactivate, then Uninstall.
+2. Remove the files from inc/plugins/ and inc/languages/.
+
+Deactivate alone preserves your settings for later.
+Uninstall fully removes settings from the database.
+
+See README.md for detailed configuration and troubleshooting.
