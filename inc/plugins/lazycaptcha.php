@@ -106,7 +106,7 @@ function lazycaptcha_install()
             'name'        => 'lazycaptcha_type',
             'title'       => 'Challenge Type',
             'description' => 'Which challenge to present.',
-            'optionscode' => "select\nauto=Auto\nimage_puzzle=Image puzzles\npow=Proof of Work (invisible)\nbehavioral=Behavioral (invisible)\ntext_math=Text / Math",
+            'optionscode' => "select\nauto=Auto\nimage_puzzle=Image puzzles\npow=Proof of Work (invisible)\nbehavioral=Behavioral (invisible)\ntext_math=Text / Math\npress_hold=Press and Hold\nrotate_align=Rotate to Align (high-friction)",
             'value'       => 'auto',
             'disporder'   => 4,
             'gid'         => $gid,
