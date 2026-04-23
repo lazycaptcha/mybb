@@ -243,7 +243,7 @@ function lazycaptcha_widget_html()
     }
 
     $type  = htmlspecialchars_uni($mybb->settings['lazycaptcha_type'] ?? 'auto');
-    $theme = htmlspecialchars_uni($mybb->settings['lazycaptcha_theme'] ?? 'light');
+    $theme = htmlspecialchars_uni($mybb->settings['lazycaptcha_theme'] ?? 'auto');
     $base  = rtrim((string) ($mybb->settings['lazycaptcha_base_url'] ?? 'https://lazycaptcha.com'), '/');
 
     $html  = '<div class="lazycaptcha" data-sitekey="' . htmlspecialchars_uni($siteKey) . '"';
