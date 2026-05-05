@@ -44,7 +44,7 @@ function lazycaptcha_info()
         'website'       => 'https://lazycaptcha.com',
         'author'        => 'LazyCaptcha',
         'authorsite'    => 'https://lazycaptcha.com',
-        'version'       => '0.1.0',
+        'version'       => '2.0.0',
         'compatibility' => '18*',
         'codename'      => 'lazycaptcha',
     ];
@@ -115,9 +115,27 @@ function lazycaptcha_install()
             'name'        => 'lazycaptcha_theme',
             'title'       => 'Theme',
             'description' => 'Widget appearance.',
-            'optionscode' => "select\nlight=Light\ndark=Dark",
-            'value'       => 'light',
+            'optionscode' => "select\nlight=Light\ndark=Dark\nauto=Auto",
+            'value'       => 'auto',
             'disporder'   => 5,
+            'gid'         => $gid,
+        ],
+        [
+            'name'        => 'lazycaptcha_widget',
+            'title'       => 'Widget Preset',
+            'description' => 'Widget layout preset. Newsletter stays intentionally skinny.',
+            'optionscode' => "select\nstandard=Standard\ncompact=Compact\nnewsletter=Newsletter\nlogin=Login",
+            'value'       => 'standard',
+            'disporder'   => 6,
+            'gid'         => $gid,
+        ],
+        [
+            'name'        => 'lazycaptcha_width',
+            'title'       => 'Width Override',
+            'description' => 'Optional CSS width value. The hosted widget caps widths at 500px.',
+            'optionscode' => 'text',
+            'value'       => '',
+            'disporder'   => 7,
             'gid'         => $gid,
         ],
         [
@@ -126,7 +144,7 @@ function lazycaptcha_install()
             'description' => 'Require a CAPTCHA on new account registration.',
             'optionscode' => 'yesno',
             'value'       => '1',
-            'disporder'   => 6,
+            'disporder'   => 8,
             'gid'         => $gid,
         ],
         [
@@ -135,7 +153,7 @@ function lazycaptcha_install()
             'description' => 'Require a CAPTCHA on login.',
             'optionscode' => 'yesno',
             'value'       => '0',
-            'disporder'   => 7,
+            'disporder'   => 9,
             'gid'         => $gid,
         ],
         [
@@ -144,7 +162,7 @@ function lazycaptcha_install()
             'description' => 'Require a CAPTCHA on the lost-password form.',
             'optionscode' => 'yesno',
             'value'       => '1',
-            'disporder'   => 8,
+            'disporder'   => 10,
             'gid'         => $gid,
         ],
         [
@@ -153,7 +171,7 @@ function lazycaptcha_install()
             'description' => 'Require a CAPTCHA on new threads and replies. Auto-skipped for users with more than N posts.',
             'optionscode' => 'yesno',
             'value'       => '1',
-            'disporder'   => 9,
+            'disporder'   => 11,
             'gid'         => $gid,
         ],
         [
@@ -162,7 +180,7 @@ function lazycaptcha_install()
             'description' => 'Users with at least this many posts skip the CAPTCHA on threads/replies. Set to 0 to never skip.',
             'optionscode' => 'text',
             'value'       => '10',
-            'disporder'   => 10,
+            'disporder'   => 12,
             'gid'         => $gid,
         ],
     ];
@@ -244,10 +262,16 @@ function lazycaptcha_widget_html()
 
     $type  = htmlspecialchars_uni($mybb->settings['lazycaptcha_type'] ?? 'auto');
     $theme = htmlspecialchars_uni($mybb->settings['lazycaptcha_theme'] ?? 'auto');
+    $widget = htmlspecialchars_uni($mybb->settings['lazycaptcha_widget'] ?? 'standard');
+    $width = htmlspecialchars_uni($mybb->settings['lazycaptcha_width'] ?? '');
     $base  = rtrim((string) ($mybb->settings['lazycaptcha_base_url'] ?? 'https://lazycaptcha.com'), '/');
 
     $html  = '<div class="lazycaptcha" data-sitekey="' . htmlspecialchars_uni($siteKey) . '"';
-    $html .= ' data-type="' . $type . '" data-theme="' . $theme . '"></div>';
+    $html .= ' data-type="' . $type . '" data-theme="' . $theme . '" data-widget="' . $widget . '"';
+    if ($width !== '') {
+        $html .= ' data-width="' . $width . '"';
+    }
+    $html .= '></div>';
     $html .= '<script src="' . htmlspecialchars_uni($base) . '/api/captcha/v1/lazycaptcha.js" async defer></script>';
 
     return $html;

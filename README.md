@@ -65,8 +65,10 @@ Log out and try to register a new account. You should see the LazyCaptcha widget
 | Site Key | — | Public UUID embedded in the widget |
 | Secret Key | — | Private key used for server-side verification |
 | LazyCaptcha URL | `https://lazycaptcha.com` | Your instance URL (change for self-hosted) |
-| Challenge Type | `auto` | Image puzzle / PoW / behavioral / text-math |
-| Theme | `light` | Widget appearance |
+| Challenge Type | `auto` | Image puzzle / PoW / behavioral / text-math / press-and-hold / rotate-to-align |
+| Theme | `auto` | Widget appearance |
+| Widget Preset | `standard` | Standard / compact / newsletter / login |
+| Width Override | â€” | Optional CSS width value, capped at `500px` |
 | Protect registration | Yes | |
 | Protect login | No | |
 | Protect forgot password | Yes | |
@@ -75,7 +77,7 @@ Log out and try to register a new account. You should see the LazyCaptcha widget
 
 ## How it works
 
-On registration/login/posting, the plugin renders the LazyCaptcha widget and loads the script from your configured URL. When the user solves the challenge, the widget injects a hidden `lazycaptcha-token` input into the form.
+On registration/login/posting, the plugin renders the LazyCaptcha widget and loads the script from your configured URL. When the visitor completes the challenge flow, the widget injects a hidden `lazycaptcha-token` input into the form.
 
 On submit, the plugin hooks into MyBB's verification flow (`*_do_*_start` hooks), reads the token, and verifies it server-to-server by POSTing to `/api/captcha/v1/verify`. On failure, an error is added to the form's error array (or `error()` is called for login, which MyBB displays natively).
 
